@@ -18,12 +18,16 @@ import com.photoalbum.service.UserService;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	private DaoAuthenticationProvider authProvider;
+
 	@Autowired
-	private UserService userService;
+	public SecurityConfiguration(DaoAuthenticationProvider authProvider) {
+		this.authProvider = authProvider;
+	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authProvider());
+		auth.authenticationProvider(authProvider);
 	}
 
 	@Override
@@ -39,16 +43,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 
-	@Bean
-	public DaoAuthenticationProvider authProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userService);
-		authProvider.setPasswordEncoder(passwordEncoder());
-		return authProvider;
-	}
 }
