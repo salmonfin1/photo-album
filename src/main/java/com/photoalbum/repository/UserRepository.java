@@ -1,6 +1,6 @@
 package com.photoalbum.repository;
 
-import com.photoalbum.model.User;
+import com.photoalbum.model.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

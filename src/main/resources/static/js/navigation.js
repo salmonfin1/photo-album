@@ -3,8 +3,8 @@ angular.module('photoalbum')
 
 
 		function($rootScope, $http, $location, $route) {
-			
-			var self = this;
+
+            var self = this;
 
 			self.tab = function(route) {
 				return $route.current && route === $route.current.controller;
@@ -18,21 +18,15 @@ angular.module('photoalbum')
 									+ credentials.password)
 				} : {};
 
-				if(headers.authorization !== undefined) {
-                    $http.get('user', {
-                        headers : headers
-                    }).then(function(response) {
-                        if (response.data.name) {
-                            $rootScope.authenticated = true;
-                        } else {
-                            $rootScope.authenticated = false;
-                        }
-                        callback && callback($rootScope.authenticated);
-                    }, function() {
-                        $rootScope.authenticated = false;
-                        callback && callback(false);
-                    });
-                }
+                $http.get('user', {
+                    headers : headers
+                }).then(function(response) {
+                    $rootScope.authenticated = !!response.data.name;
+                    callback && callback($rootScope.authenticated);
+                }, function() {
+                    $rootScope.authenticated = false;
+                    callback && callback(false);
+                });
 
 			};
 
@@ -43,9 +37,9 @@ angular.module('photoalbum')
 				authenticate(self.credentials, function(authenticated) {
 					if (authenticated) {
 						console.log("Login succeeded")
-						$location.path("/");
 						self.error = false;
 						$rootScope.authenticated = true;
+                        $location.path("/");
 					} else {
 						console.log("Login failed")
 						$location.path("/login");

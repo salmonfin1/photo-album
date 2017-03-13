@@ -1,7 +1,7 @@
 package com.photoalbum.service;
 
-import com.photoalbum.model.Authority;
-import com.photoalbum.model.User;
+import com.photoalbum.model.user.Authority;
+import com.photoalbum.model.user.User;
 import com.photoalbum.repository.AuthorityRepository;
 import com.photoalbum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-import java.util.Optional;
 
 @Component
 public class UserService implements UserDetailsService {
@@ -24,7 +23,9 @@ public class UserService implements UserDetailsService {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder) {
+	public UserService(final UserRepository userRepository,
+	                   final AuthorityRepository authorityRepository,
+	                   final PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.authorityRepository = authorityRepository;
 		this.passwordEncoder = passwordEncoder;

@@ -2,3 +2,11 @@ logging:
   level:
     org.springframework.security: DEBUG
 
+spring:
+  http:
+    multipart:
+      max-file-size: 10Mb
+
+ocrspace:
+  key: 8266a8b4aa88957
+  url: http://api.ocr.space/parse/image
