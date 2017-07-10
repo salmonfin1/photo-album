@@ -53,6 +53,11 @@ public class ImageService {
 		return new byte[0];
 	}
 
+	public Image getOneImage() {
+	    return imageRepository.findAll().stream()
+                .findFirst().orElseThrow(() -> new RuntimeException("No Image Found"));
+    }
+
 
 
 

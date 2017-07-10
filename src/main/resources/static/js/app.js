@@ -9,6 +9,10 @@ angular.module('photoalbum', [ 'ngRoute', 'angularFileUpload', 'ngTagsInput', 'n
         templateUrl : 'login.html',
         controller : 'navigation',
         controllerAs: 'controller'
+    }).when('/photo-album', {
+        templateUrl : 'photo-album.html',
+        controller : 'photoAlbum',
+        controllerAs : 'controller'
     }).otherwise('/');
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
